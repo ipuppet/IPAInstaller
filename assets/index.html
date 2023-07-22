@@ -1,0 +1,208 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+        <title>本地 IPA 安装</title>
+
+        <style>
+            body {
+                font-size: 16px;
+                margin: 0;
+            }
+
+            a:link {
+                text-decoration: none;
+                color: #0099ff;
+            }
+
+            .top {
+                display: none;
+            }
+
+            .container {
+                padding: 20px;
+                text-align: center;
+                margin: 8px;
+            }
+
+            .title {
+                font-size: 26px;
+                padding-top: 18px;
+            }
+
+            .ipa-name {
+                border-top: 1px solid #eee;
+                padding-top: 9px;
+                margin-top: 9px;
+                margin-bottom: 18px;
+            }
+
+            .ipa-name span {
+                color: #999;
+                padding-left: 9px;
+                padding-right: 3px;
+            }
+
+            .install-button {
+                text-align: center;
+                height: 45px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .install-button a {
+                border-radius: 2px;
+                color: #555;
+                display: inline-block;
+                background: #fff;
+                border: 1px solid #bbb;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+                width: 58%;
+                height: 43px;
+                line-height: 43px;
+                min-width: 200px;
+            }
+
+            .install-button a:hover {
+                background: #eee;
+                box-shadow: initial;
+                border: 1px solid #eee;
+            }
+
+            .prompt {
+                background-color: #f0f0f0;
+                font-size: 12px;
+                border-radius: 2px;
+                text-align: center;
+                padding: 7px;
+                margin: 18px;
+            }
+
+            .blank-box {
+                padding-top: 3%;
+                padding-bottom: 3%;
+            }
+
+            .instruction {
+                text-align: left;
+                padding: 18px;
+                line-height: 2em;
+            }
+
+            .instruction span {
+                display: block;
+            }
+
+            #loader-container {
+                display: none;
+                position: absolute;
+                right: 20px;
+                left: 20px;
+                padding-top: 17px;
+                background: rgba(255, 255, 255, 0.7);
+                z-index: 9;
+                height: 50px;
+                opacity: 0.5;
+            }
+
+            .loader,
+            .loader:before,
+            .loader:after {
+                border-radius: 50%;
+            }
+
+            .loader:before,
+            .loader:after {
+                position: absolute;
+                content: "";
+            }
+
+            .loader:before {
+                width: 16px;
+                height: 32px;
+                background: #fff;
+                border-radius: 32px 0 0 32px;
+                top: -1px;
+                left: -1px;
+                transform-origin: 16px 16px;
+                animation: load2 1s infinite ease 1.5s;
+            }
+
+            .loader {
+                font-size: 11px;
+                text-indent: -99999em;
+                margin: auto;
+                position: relative;
+                width: 30px;
+                height: 30px;
+                box-shadow: inset 0 0 0 4px #09f;
+            }
+
+            .loader:after {
+                width: 16px;
+                height: 32px;
+                background: #fff;
+                border-radius: 0 31px 31px 0;
+                top: -1px;
+                left: 15px;
+                transform-origin: 0px 16px;
+                animation: load2 1s infinite ease;
+            }
+
+            @keyframes load2 {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="title">本地 IPA 安装</div>
+
+            <div class="ipa-name">
+                <span>${ipaName}</span>
+            </div>
+
+            <div class="blank-box"></div>
+
+            <div class="instruction">
+                <span>安装说明:</span>
+                <span>1、本地 ipa 安装是基于 itemServices 协议对本地 ipa 的安装方法。</span>
+                <span>2、本地 ipa 软件必须为 APP Store 下载的原版或在签名有效期内的软件。</span>
+            </div>
+
+            <div class="prompt">提示：请使用 IOS 自带浏览器 Safari 安装，否则安装失败。</div>
+
+            <div id="loader-container">
+                <div class="loader"></div>
+            </div>
+
+            <div class="install-button" onclick="loading();">
+                <a
+                    class="plist"
+                    href="itms-services://?action=download-manifest&url=${plistUrl}"
+                    id="plist"
+                    target="_blank"
+                    >点击安装</a
+                >
+            </div>
+
+            <script>
+                function loading() {
+                    setTimeout('document.getElementById("loader-container").style.display="block";', 100)
+                    setTimeout('document.getElementById("loader-container").style.display="none";', 5000)
+                    var plist = document.getElementById("plist")
+                    plist.innerText = "正在安装中，请桌面查看"
+                }
+            </script>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+"DELETE" = "删除";
+"CONFIRM_DELETE_TITLE" = "删除前确认";
+"CONFIRM_DELETE_MSG" = "确认要删除 ${content} 吗？";
+
+"NAME_ALREADY_EXISTS" = "名称已存在";
+
+"SHOW_APPLE_ID" = "显示 Apple ID";
+
+"NEED_TLS_CONFIG" = "需要配置 SSL/TLS";
+"SEE_README" = "查看 README 以获取更多帮助";
