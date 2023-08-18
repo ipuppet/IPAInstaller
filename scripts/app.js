@@ -12,7 +12,7 @@ class AppKernel extends Kernel {
             port: 8080,
             domain: this.setting.get("tls.domain"),
             cert: this.setting.get("tls.cert"),
-            key: this.setting.get("tls.key")
+            key: this.setting.get("tls.cert.key")
         }
     }
 
