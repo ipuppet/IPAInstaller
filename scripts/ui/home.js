@@ -75,7 +75,7 @@ class HomeUI {
     }
 
     getIPAs() {
-        const ipas = $file.list("shared://ipa-installer")
+        const ipas = $file.list("shared://ipa-installer/ipas")
         return ipas.map(name => {
             const plist = this.getPlist(name)
             return {

@@ -1,12 +1,13 @@
 const { UIKit, Logger, Kernel, FileStorage, Setting } = require("./libs/easy-jsbox")
+const compatibility = require("./compatibility")
 const HomeUI = require("./ui/home")
 
 /**
  * @typedef {AppKernel} AppKernel
  */
 class AppKernel extends Kernel {
-    static fileStorage = new FileStorage()
-    basePath = "shared://ipa-installer"
+    static fileStorage = new FileStorage({ basePath: "shared://ipa-installer" })
+    basePath = "shared://ipa-installer/ipas"
 
     get tlsConfig() {
         return {
@@ -104,19 +105,19 @@ class AppKernel extends Kernel {
 }
 
 class AppUI {
+    static kernel = new AppKernel()
     static renderMainUI() {
-        const kernel = new AppKernel()
-        kernel.useJsboxNav()
-        kernel.setting.useJsboxNav()
+        this.kernel.useJsboxNav()
+        this.kernel.setting.useJsboxNav()
         // 设置 navButtons
-        kernel.setNavButtons([
+        this.kernel.setNavButtons([
             {
                 symbol: "gear",
                 handler: () => {
                     UIKit.push({
                         title: $l10n("SETTING"),
                         bgcolor: Setting.bgcolor,
-                        views: [kernel.setting.getListView()]
+                        views: [this.kernel.setting.getListView()]
                     })
                 }
             },
@@ -124,12 +125,12 @@ class AppUI {
                 symbol: "plus",
                 handler: async () => {
                     const file = await $drive.open()
-                    if (file) kernel.homeUI.import(file)
+                    if (file) this.kernel.homeUI.import(file)
                 }
             }
         ])
 
-        kernel.UIRender({ views: [kernel.homeUI.getListView()] })
+        this.kernel.UIRender({ views: [this.kernel.homeUI.getListView()] })
     }
 
     static renderUnsupported() {
@@ -151,6 +152,8 @@ class AppUI {
 
 module.exports = {
     run: () => {
+        // 兼容性操作
+        compatibility(AppUI.kernel)
         if ($app.env === $env.app) {
             AppUI.renderMainUI()
         } else {
