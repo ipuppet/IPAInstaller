@@ -1,10 +1,11 @@
-const { UIKit, Kernel, FileStorage, Setting } = require("./libs/easy-jsbox")
+const { UIKit, Logger, Kernel, FileStorage, Setting } = require("./libs/easy-jsbox")
 const HomeUI = require("./ui/home")
 
 /**
  * @typedef {AppKernel} AppKernel
  */
 class AppKernel extends Kernel {
+    static fileStorage = new FileStorage()
     basePath = "shared://ipa-installer"
 
     get tlsConfig() {
@@ -23,8 +24,13 @@ class AppKernel extends Kernel {
 
     constructor() {
         super()
+        // FileStorage
+        this.fileStorage = AppKernel.fileStorage
+        // Logger
+        this.logger = new Logger()
+        this.logger.setWriter(this.fileStorage, this.logFilePath)
         // setting
-        this.setting = new Setting({ fileStorage: new FileStorage() })
+        this.setting = new Setting({ fileStorage: this.fileStorage })
         this.setting.loadConfig()
         this.initSettingEvents()
         this.initFiles()
