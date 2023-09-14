@@ -185,22 +185,19 @@
                 <div class="loader"></div>
             </div>
 
-            <div class="install-button" onclick="loading();">
-                <a
-                    class="plist"
-                    href="itms-services://?action=download-manifest&url=${plistUrl}"
-                    id="plist"
-                    target="_blank"
-                    >点击安装</a
-                >
+            <div class="install-button" onclick="loading()">
+                <a class="plist" onclick="install()" id="plist">点击安装</a>
             </div>
 
             <script>
+                function install() {
+                    window.open("${plistUrl}", "_self")
+                }
                 function loading() {
                     setTimeout('document.getElementById("loader-container").style.display="block";', 100)
-                    setTimeout('document.getElementById("loader-container").style.display="none";', 5000)
+                    // setTimeout('document.getElementById("loader-container").style.display="none";', 5000)
                     var plist = document.getElementById("plist")
-                    plist.innerText = "正在安装中，请桌面查看"
+                    plist.innerText = "正在安装中，请稍等"
                 }
             </script>
         </div>

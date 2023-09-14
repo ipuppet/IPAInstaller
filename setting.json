@@ -3,7 +3,9 @@
         "title": "GENERAL",
         "items": [
             {
-                "icon": ["person.fill"],
+                "icon": [
+                    "person.fill"
+                ],
                 "key": "general.showAppleID",
                 "title": "SHOW_APPLE_ID",
                 "type": "switch",
@@ -14,14 +16,27 @@
     {
         "items": [
             {
-                "icon": ["shield.lefthalf.filled"],
+                "icon": [
+                    "shield.lefthalf.filled"
+                ],
                 "title": "SSL/TLS",
                 "type": "child",
                 "children": [
                     {
                         "items": [
                             {
-                                "icon": ["network"],
+                                "icon": [
+                                    "paperplane"
+                                ],
+                                "key": "tls.port",
+                                "title": "Port",
+                                "type": "number",
+                                "value": 443
+                            },
+                            {
+                                "icon": [
+                                    "network"
+                                ],
                                 "key": "tls.domain",
                                 "title": "Domain",
                                 "type": "input",
@@ -33,14 +48,18 @@
                         "title": "Cert",
                         "items": [
                             {
-                                "icon": ["checkmark.seal"],
+                                "icon": [
+                                    "checkmark.seal"
+                                ],
                                 "key": "tls.cert",
                                 "title": "Cert",
                                 "type": "string",
                                 "value": ""
                             },
                             {
-                                "icon": ["key.fill"],
+                                "icon": [
+                                    "key.fill"
+                                ],
                                 "key": "tls.cert.key",
                                 "title": "Key",
                                 "type": "string",
@@ -56,19 +75,34 @@
         "title": "ABOUT",
         "items": [
             {
-                "icon": ["/assets/icon/github.com.jpeg", "white"],
+                "icon": [
+                    "/assets/icon/github.com.jpeg",
+                    "white"
+                ],
                 "title": "Github",
                 "type": "info",
-                "value": ["ipuppet/IPAInstaller", "https://github.com/ipuppet/IPAInstaller"]
+                "value": [
+                    "ipuppet/IPAInstaller",
+                    "https://github.com/ipuppet/IPAInstaller"
+                ]
             },
             {
-                "icon": ["person.fill", "#FF9900"],
+                "icon": [
+                    "person.fill",
+                    "#FF9900"
+                ],
                 "title": "AUTHOR",
                 "type": "info",
-                "value": ["ipuppet", "https://blog.ultagic.com"]
+                "value": [
+                    "ipuppet",
+                    "https://blog.ultagic.com"
+                ]
             },
             {
-                "icon": ["book.fill", "#A569BD"],
+                "icon": [
+                    "book.fill",
+                    "#A569BD"
+                ],
                 "title": "README",
                 "type": "script",
                 "value": "this.method.readme"

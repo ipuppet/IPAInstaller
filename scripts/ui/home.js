@@ -169,9 +169,11 @@ class HomeUI {
             })
             return
         }
-        $safari.open({
-            url: `https://${this.kernel.tlsConfig.domain}:${this.kernel.tlsConfig.port}/${name}`
-        })
+        $nodejs.notify("install", { name })
+        // name = $text.URLEncode(name)
+        // $safari.open({
+        //     url: `https://${this.kernel.tlsConfig.domain}:${this.kernel.tlsConfig.port}/${name}/html`
+        // })
     }
 
     getListView() {

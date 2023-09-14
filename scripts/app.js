@@ -10,7 +10,7 @@ class AppKernel extends Kernel {
 
     get tlsConfig() {
         return {
-            port: 8080,
+            port: this.setting.get("tls.port"),
             domain: this.setting.get("tls.domain"),
             cert: this.setting.get("tls.cert"),
             key: this.setting.get("tls.cert.key")
