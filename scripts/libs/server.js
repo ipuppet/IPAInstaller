@@ -27,17 +27,20 @@ const server = https.createServer(
             response.write(content)
             response.end()
         } else if (action === "ipa") {
-            const filePath = path.join($jsbox.path.shared, `/ipa-installer/${ipaName}/${ipaName}.ipa`)
+            const filePath = path.join($jsbox.path.shared, `/ipa-installer/ipas/${ipaName}/${ipaName}.ipa`)
             response.statusCode = 200
             // 建立流对象，读文件
             const stream = fs.createReadStream(filePath)
-            stream.on("error", () => {
+            stream.on("error", error => {
+                console.error("Error piping file:", error)
                 response.statusCode = 500
-                response.end()
+                response.end("Internal Server Error")
+            })
+            response.on("finish", () => {
+                setTimeout(() => ui.success("安装完成"), 3000)
             })
             // 读取文件
             stream.pipe(response)
-            ui.success("安装完成")
         } else if (action === "html") {
             let content = fs.readFileSync(path.join(basePath, "/assets/index.html")).toString()
             const url = `https://${$context.query.domain}:${$context.query.port}/app.plist`
