@@ -69,7 +69,6 @@ class VersionActions {
     }
 
     ver1() {
-        console.log($file.list("shared://ipa-installer"))
         $file.list("shared://ipa-installer").forEach(ipa => {
             if (!$file.exists(`shared://ipa-installer/${ipa}/Content`)) return
             $file.move({
